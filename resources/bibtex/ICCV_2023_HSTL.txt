@@ -1,0 +1,7 @@
+@inproceedings{wang2023hierarchical,
+  title={Hierarchical Spatio-Temporal Representation Learning for Gait Recognition},
+  author={Wang, Lei and Liu, Bo and Liang, Fangfang and Wang, Bincheng},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={19639--19649},
+  year={2023}
+}
