@@ -1,0 +1,6 @@
+@article{wang2023hih,
+  title={HiH: A Multi-modal Hierarchy in Hierarchy Network for Unconstrained Gait Recognition},
+  author={Wang, Lei and Ma, Yinchi and Luan, Peng and Yao, Wei and Li, Congcong and Liu, Bo},
+  journal={arXiv preprint arXiv:2311.11210},
+  year={2023}
+}
