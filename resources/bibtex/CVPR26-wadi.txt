@@ -1,0 +1,6 @@
+@article{wang2026wadi,
+  title={WaDi: Weight Direction-aware Distillation for One-step Image Synthesis},
+  author={Wang, Lei and Cheng, Yang and Li, Senmao and Wu, Ge and Wang, Yaxing and Yang, Jian},
+  journal={arXiv preprint arXiv:2603.08258},
+  year={2026}
+}
