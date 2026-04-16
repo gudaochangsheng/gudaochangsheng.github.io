@@ -1,0 +1,6 @@
+@article{wang2026refalign,
+  title={RefAlign: Representation Alignment for Reference-to-Video Generation},
+  author={Wang, Lei and Song, YuXin and Wu, Ge and Feng, Haocheng and Zhou, Hang and Wang, Jingdong and Wang, Yaxing and others},
+  journal={arXiv preprint arXiv:2603.25743},
+  year={2026}
+}
