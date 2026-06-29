@@ -1,588 +1,1162 @@
-<html>
-
+```html
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Lei Wang</title>
-    <meta content="Lei Wang, https://gudaochangsheng.github.io" name="keywords">
-    <style media="screen" type="text/css">
-        html,
-        body,
-        div,
-        span,
-        applet,
-        object,
-        iframe,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        blockquote,
-        pre,
-        a,
-        abbr,
-        acronym,
-        address,
-        big,
-        cite,
-        code,
-        del,
-        dfn,
-        em,
-        font,
-        img,
-        ins,
-        kbd,
-        q,
-        s,
-        samp,
-        small,
-        strike,
-        strong,
-        sub,
-        tt,
-        var,
-        dl,
-        dt,
-        dd,
-        ol,
-        ul,
-        li,
-        fieldset,
-        form,
-        label,
-        legend,
-        table,
-        caption,
-        tbody,
-        tfoot,
-        thead,
-        tr,
-        th,
-        td {
-            border: 0pt none;
-            font-family: inherit;
-            font-size: 100%;
-            font-style: inherit;
-            font-weight: inherit;
-            margin: 0pt;
-            outline-color: invert;
-            outline-style: none;
-            outline-width: 0pt;
-            padding: 0pt;
-            vertical-align: baseline;
-        }
+    <meta name="keywords" content="Lei Wang, Nankai University, diffusion models, video generation, computer vision">
+    <meta name="description" content="Lei Wang's academic homepage. Ph.D. Candidate at Nankai University working on controllable video generation, diffusion models, vision-language models, and knowledge distillation.">
 
-        a {
-            color: #1772d0;
-            text-decoration: none;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-        a:focus,
-        a:hover {
-            color: #f09228;
-            text-decoration: none;
-        }
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164510176-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164510176-1');
+    </script>
 
-        a.paper {
-            font-weight: bold;
-            font-size: 12pt;
-        }
-
-        b.paper {
-            font-weight: bold;
-            font-size: 12pt;
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --paper: #ffffff;
+            --paper-soft: #fbfcff;
+            --ink: #172033;
+            --muted: #667085;
+            --line: #e4e7ec;
+            --brand: #1d4ed8;
+            --brand-dark: #163ea8;
+            --accent: #0f766e;
+            --accent-soft: #ecfdf5;
+            --orange: #f97316;
+            --orange-soft: #fff7ed;
+            --purple: #7c3aed;
+            --purple-soft: #f5f3ff;
+            --shadow: 0 12px 32px rgba(16, 24, 40, 0.08);
+            --shadow-soft: 0 6px 18px rgba(16, 24, 40, 0.05);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
         }
 
         * {
-            margin: 0pt;
-            padding: 0pt;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(29, 78, 216, 0.09), transparent 28%),
+                radial-gradient(circle at 100% 15%, rgba(15, 118, 110, 0.07), transparent 26%),
+                var(--bg);
+            color: var(--ink);
+            font-family: "DM Sans", "Segoe UI", Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.72;
+        }
+
+        a {
+            color: var(--brand);
+            text-decoration: none;
+            transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        img {
+            max-width: 100%;
+            border: 0;
+        }
+
+        .page-shell {
+            width: min(1120px, calc(100% - 32px));
+            margin: 34px auto 56px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: center;
+            padding: 26px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(228, 231, 236, 0.92);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .avatar-wrap {
             position: relative;
-            margin: 3em auto 2em auto;
-            width: 800px;
-            font-family: Verdana, Helvetica, sans-serif;
-            font-size: 14px;
-            background: #eee;
         }
 
-        h2 {
-            font-family: Verdana, Helvetica, sans-serif;
-            font-size: 15pt;
-            font-weight: 700;
+        .avatar {
+            display: block;
+            width: 142px;
+            height: 142px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 22px rgba(16, 24, 40, 0.14);
         }
 
-        h3 {
-            font-family: Verdana, Helvetica, sans-serif;
+        .identity {
+            min-width: 0;
+        }
+
+        .name {
+            margin: 0;
+            color: var(--ink);
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(30px, 4vw, 42px);
+            line-height: 1.08;
+            letter-spacing: -0.035em;
+        }
+
+        .role {
+            margin: 8px 0 12px;
+            color: var(--brand-dark);
             font-size: 16px;
             font-weight: 700;
         }
 
-        strong {
-            font-family: Verdana, Helvetica, sans-serif;
+        .meta-line {
+            margin: 3px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .meta-line strong {
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .quick-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 5px 11px;
+            color: #29436f;
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 700;
+            background: #f6f8fc;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
         }
 
-        ul {
-            list-style: circle;
+        .quick-links a:hover {
+            color: #ffffff;
+            background: var(--brand);
+            border-color: var(--brand);
         }
 
-        img {
-            border: none;
+        .nku-logo-wrap {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            min-width: 112px;
         }
 
-        li {
-            padding-bottom: 0.5em;
-            margin-left: 1.4em;
+        .nku-logo {
+            width: 112px;
+            max-height: 112px;
+            object-fit: contain;
         }
 
-        alert {
-            font-family: Verdana, Helvetica, sans-serif;
+        .nav {
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 20px 0 28px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(228, 231, 236, 0.95);
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav a {
+            padding: 7px 10px;
+            color: #475467;
             font-size: 13px;
-            font-weight: bold;
-            color: #FF0000;
+            font-weight: 700;
+            border-radius: 8px;
         }
 
-        em,
-        i {
-            font-style: italic;
+        .nav a:hover {
+            color: var(--brand);
+            background: #eef4ff;
         }
 
-        div.section {
-            clear: both;
-            margin-bottom: 1.5em;
-            background: #eee;
+        .section {
+            margin: 34px 0;
+            scroll-margin-top: 88px;
         }
 
-        div.spanner {
-            clear: both;
+        .section-heading {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
         }
 
-        div.paper {
-            clear: both;
-            margin-top: 0.5em;
-            margin-bottom: 1em;
-            border: 1px solid #ddd;
-            background: #fff;
-            padding: 1em 1em 1em 1em;
+        .section-heading h2 {
+            margin: 0;
+            color: var(--ink);
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 28px;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
         }
 
-        div.paper div {
-            padding-left: 230px;
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
         }
 
-        img.paper {
-            margin-bottom: 0.5em;
-            float: left;
-            width: 200px;
+        .card {
+            padding: 24px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
         }
 
-        span.blurb {
-            font-style: italic;
-            display: block;
-            margin-top: 0.75em;
-            margin-bottom: 0.5em;
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 290px;
+            gap: 24px;
+            align-items: start;
         }
 
-        pre,
-        code {
-            font-family: 'Lucida Console', 'Andale Mono', 'Courier', monospaced;
-            margin: 1em 0;
+        .about-copy {
+            color: #344054;
+        }
+
+        .about-copy p {
+            margin: 0 0 14px;
+        }
+
+        .research-box {
+            padding: 18px;
+            background: linear-gradient(145deg, #f7faff, #eef5ff);
+            border: 1px solid #dce8ff;
+            border-radius: var(--radius-md);
+        }
+
+        .research-box h3 {
+            margin: 0 0 12px;
+            color: #1f3b75;
+            font-size: 14px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            color: #1e3a8a;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.35;
+            background: #ffffff;
+            border: 1px solid #d9e6ff;
+            border-radius: 999px;
+        }
+
+        .personal-note {
+            margin-top: 18px;
+            padding: 15px 17px;
+            color: #5b3a1d;
+            background: #fffaf4;
+            border: 1px solid #fde4c7;
+            border-radius: var(--radius-md);
+        }
+
+        .personal-note strong {
+            color: #a14b12;
+        }
+
+        .timeline,
+        .simple-list {
+            margin: 0;
             padding: 0;
+            list-style: none;
         }
 
-        div.paper pre {
-            font-size: 0.9em;
+        .timeline li {
+            position: relative;
+            padding: 0 0 16px 22px;
+            color: #344054;
+        }
+
+        .timeline li:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline li::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 9px;
+            height: 9px;
+            background: var(--brand);
+            border-radius: 999px;
+            box-shadow: 0 0 0 4px #e9f0ff;
+        }
+
+        .timeline li::after {
+            content: "";
+            position: absolute;
+            top: 19px;
+            bottom: -1px;
+            left: 4px;
+            width: 1px;
+            background: #d8e2f4;
+        }
+
+        .timeline li:last-child::after {
+            display: none;
+        }
+
+        .date {
+            color: var(--brand-dark);
+            font-weight: 800;
+        }
+
+        .simple-list li {
+            position: relative;
+            padding: 7px 0 7px 19px;
+            color: #344054;
+        }
+
+        .simple-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-weight: 800;
+        }
+
+        .pub-groups {
+            display: grid;
+            gap: 24px;
+        }
+
+        .pub-group-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 12px;
+            color: #475467;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .pub-group-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .publication-card {
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+            gap: 22px;
+            margin-bottom: 16px;
+            padding: 20px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .publication-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .publication-card:hover {
+            border-color: #bfd3ff;
+            box-shadow: 0 12px 28px rgba(29, 78, 216, 0.11);
+            transform: translateY(-2px);
+        }
+
+        .publication-card.featured {
+            background:
+                radial-gradient(circle at 100% 0%, rgba(29, 78, 216, 0.06), transparent 33%),
+                var(--paper);
+            border-color: #cddcff;
+        }
+
+        .paper-thumb {
+            width: 100%;
+            aspect-ratio: 1.26 / 1;
+            object-fit: cover;
+            border: 1px solid #e6eaf0;
+            border-radius: 10px;
+            background: #f6f8fb;
+        }
+
+        .publication-content {
+            min-width: 0;
+        }
+
+        .paper-title {
+            display: inline-block;
+            margin: 0 0 6px;
+            color: var(--ink);
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.38;
+        }
+
+        .paper-title:hover {
+            color: var(--brand);
+        }
+
+        .authors,
+        .venue {
+            margin: 4px 0;
+            color: #475467;
+        }
+
+        .authors strong {
+            color: var(--ink);
+        }
+
+        .venue {
+            color: var(--brand-dark);
+            font-weight: 700;
+        }
+
+        .paper-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            align-items: center;
+            margin: 12px 0 10px;
+        }
+
+        .paper-links a,
+        .paper-links .disabled-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 29px;
+            padding: 3px 9px;
+            color: #1d4ed8;
+            font-size: 12px;
+            font-weight: 800;
+            background: #eff5ff;
+            border: 1px solid #dbeafe;
+            border-radius: 7px;
+        }
+
+        .paper-links a:hover {
+            color: #ffffff;
+            background: var(--brand);
+            border-color: var(--brand);
+        }
+
+        .paper-links .disabled-link {
+            color: #98a2b3;
+            background: #f8fafc;
+            border-color: #eaecf0;
+            cursor: default;
+        }
+
+        .github-stars {
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .key-idea {
+            margin-top: 10px;
+            padding: 11px 13px;
+            color: #155e75;
+            font-size: 14px;
+            line-height: 1.62;
+            background: #ecfeff;
+            border-left: 3px solid #06b6d4;
+            border-radius: 7px;
+        }
+
+        .key-idea strong {
+            color: #0e7490;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .sub-card {
+            padding: 20px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .sub-card h3 {
+            margin: 0 0 10px;
+            color: var(--ink);
+            font-size: 16px;
+        }
+
+        .friendly-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .friendly-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 11px;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 700;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 9px;
+        }
+
+        .friendly-links a:hover {
+            color: var(--brand);
+            background: #eef4ff;
+            border-color: #c9dcff;
+        }
+
+        .footer {
+            margin-top: 36px;
+            padding: 20px 0 0;
+            color: #98a2b3;
+            font-size: 12px;
+            text-align: center;
+            border-top: 1px solid #dfe4ec;
+        }
+
+        .visitor-map {
+            width: min(640px, 100%);
+            min-height: 150px;
+            margin: 22px auto 0;
+            overflow: hidden;
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: auto minmax(0, 1fr);
+            }
+
+            .nku-logo-wrap {
+                display: none;
+            }
+
+            .about-grid,
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .publication-card {
+                grid-template-columns: 180px minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-shell {
+                width: min(100% - 22px, 1120px);
+                margin-top: 14px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                text-align: left;
+            }
+
+            .avatar {
+                width: 118px;
+                height: 118px;
+            }
+
+            .nav {
+                top: 6px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .nav a {
+                white-space: nowrap;
+            }
+
+            .section {
+                margin: 28px 0;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .section-heading p {
+                margin-top: 4px;
+            }
+
+            .card,
+            .sub-card {
+                padding: 18px;
+            }
+
+            .publication-card {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 16px;
+            }
+
+            .paper-thumb {
+                width: min(100%, 380px);
+            }
+
+            .paper-title {
+                font-size: 16px;
+            }
         }
     </style>
-
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css"/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164510176-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-164510176-1');
-    </script>
-
 </head>
 
-
 <body>
-<div style="margin-bottom: 1em; border: 1px solid #ddd; background-color: #fff; padding: 1em; height: 130px; display: flex; align-items: center;">
-    <div style="flex: 1; display: flex; align-items: center;">
-        <img title="implus" style="height: 130px;" src="./resources/images/me.jpg">
-        <div style="padding-left: 1em;">
-            <span style="line-height: 150%; font-size: 20pt;">Lei Wang (王雷)</span><br>
-            <span>Ph. D. Candidate, College of Computer Science, Nankai University</span><br>
-            <span><strong>Address</strong>: No. 38, Tongyan Road, Haihe Education Park, Tianjin, China</span><br>
-            <span><strong>Email</strong>: scitop1998 [at] {gmail.com}</span><br>
-            <!-- <span><strong>Research Group Page</strong>: <a href="https://github.com/IMPlus-PCALab">IMPlus@PCALab</a></span><br> -->
-        </div>
-    </div>
-    <div style="flex: 0; padding-left: 1em;">
-        <img title="Nankai University" style="height: 120px;" src="./resources/images/nankai_logo.png">
-    </div>
-</div>
+    <main class="page-shell">
 
-<!--<div style="clear: both; background-color: #fff; margin-top: 1.5em; padding: .2em; padding-left: .3em;">-->
-
-<div style="clear: both;">
-    <div class="section">
-        <h2>About Me [<a href="https://github.com/gudaochangsheng">GitHub</a>]
-            [<a href="https://scholar.google.com/citations?user=6Z66DAwAAAAJ&hl=zh-CN">Google Scholar</a>]
-	    [<a href="https://gudaochangsheng.blog.csdn.net/">CSDN</a>]
-	    [<a href="https://www.zhihu.com/people/gudaochangsheng">知乎</a>]
-			[<a href="https://huggingface.co/gudaochangsheng">Hugging Face</a>]
-			[<a href="https://modelscope.cn/profile/gudaochangsheng98">ModelScope</a>]
-            [<a href="./resources/cv/CV.pdf">CV</a>])
-			[<a href="http://kns--cnki--net--https.cnki.mdjsf.utuvpn.utuedu.com:9000/kcms2/article/abstract?v=-yxn0y4Pbolt3kK39EgSRgIrW6tE5BoDnBLXiN_WvtIlnJ-130_Sd6eIyoCh8c3xPU5COhYb3X1QVN7kCppr0T0IBYgJLOTPGsuqFZQ6JRN1ebvV6aELE6pUQ1bmu2Nv4nOhA5pcHqsDtuNvt8OweOiT7ciZiFPq96tR07q6_Zw=&uniplatform=NZKPT">Master’s Thesis (Gait Recognition)</a>]
-        </h2>
-        <div class="paper">
-            I'm a Ph. D. candidate in PCA Lab, VCIP, College of Computer Science, Nankai University. 
-            I got my master's degree from the College of Information Science and Technology, Hebei Agricultural University (HEBAU) in 2024. My master's advisor is <a href="https://xinxi.hebau.edu.cn/info/1132/2523.htm">Prof. Bo Liu</a> from HEBAU.           
-	    My PhD's advisor is <a href="https://gsmis.njust.edu.cn/open/TutorInfo.aspx?dsbh=t6AONNl4pZ5la8fwtaQrXw==&yxsh=z70ppxVSQAs=&zydm=eNM2K21sgHA=">Prof. Jian Yang</a> from Nankai University (NKU), who is a Changjiang Scholar. My vice-advisor is <a href="https://yaxingwang.github.io/">Prof. Yaxing Wang</a> from Jilin University. I am also a student member of the China Society of Image and Graphics (CSIG).
-<!-- 	    I started my postdoctoral career in NJUST as a candidate for the <a href="https://zhuanlan.zhihu.com/p/147471409">2020 Postdoctoral Innovative Talent Program</a>, supervised by <a href="https://imag-njust.net/jinhui-tang/">Prof. Jinhui Tang</a>. I am also a student member of the China Society of Image and Graphics (CSIG).
-	    In 2016, I spent 8 months as a research intern in Microsoft Research Asia, supervised by <a href="https://scholar.google.com/citations?user=Bl4SRU0AAAAJ&hl=zh-CN">Prof. Tao Qin</a> and <a href="https://scholar.google.com/citations?user=Nh832fgAAAAJ&hl=zh-CN">Prof. Tie-Yan Liu</a>.
-            I was a visiting scholar at <a href="https://www.momenta.cn/">Momenta</a>, mainly focusing on monocular perception algorithm. -->
-            <br><br>
-
-            My recent works are mainly on:
-	    <ul>
-		<li>controllable video generation</li>
-		<li>diffusion model</li>
-		<li>vision-language model</li>
-		<li>knowledge distillation</li>
-		<li>gait recognition</li>
-<!-- 		<li>low-level vision</li> -->
-<!-- 		<li>unsupervised learning</li>
-		<li>knowledge distillation</li> -->
-	    </ul>
-<!--             <p style='color:red'><strong>
-                 We are looking for self-motivated PhD candidates! Please feel free to contact me through the email (attach your CV, at least with a CCF-A paper).
-		 During the PhD career, you can have:
-		 <ul> 
-			<li>joint supervision with well-known research institute (e.g., Megvii, SenseTime Research, Huawei Noah's Ark Lab, BAAI)</li>
-			<li>hand in hand guidance to publish earlier papers</li>
-			<li>relatively flexible and free research space</li>
-		 </ul>
-		 We would not push hard, but you should always be self-driven for your own target, i.e., making solid and impactful contributions to the CV/AI community.
-            </strong></p>  -->
-			Outside of academia, I am also trying to live my life with care and intention; at present, I am in a relationship that I deeply cherish and am willing to invest in for the long term. ❤️❤️❤️
-        </div>
-    </div>
-</div>
-
-
-<div style="clear: both;">
-    <div class="section">
-        <h2 id="confpapers">Honor</h2>
-        <div class="paper">
-            <ul>
-		<li>
-		    2021-2022 Postgraduate School First Class Scholarships
-		</li>
-		<li>
-                    National Bronze Medal in the "China University Computer Competition - Group Programming Ladder Match" in Hebei Province in 2019.
-                </li>
-<!--                 <li>
-                    Second place of 2020 Zhengtu Cup's first AI competition, namely the industrial defect detection algorithm, <strong>150,000 RMB bonus (2nd from 900 teams)</strong>
-                </li> -->
-                <li>
-                    Second Prize of C/C++ Programming University B Group of the 10th Blue Bridge Cup National Software and Information Technology Professionals Competition Hebei Region
-                </li>
-                <li>
-                    2018 Third Prize in the Professional Group of the Second College Student Programming Competition of Hebei Agricultural University
-                </li>
-<!--                 <li>
-                    2015 Dean Medal of School of Computer Science, Nanjing University of Science and Technology, 2016 Presidential Medal of Nanjing University of Science and Technology, 2016 National Scholarship
-                </li>
-                <li>
-                    ACM-ICPC Asia Regional Contest, Silver Medal (1st)
-                </li> -->
-            </ul>
-            <div class="spanner"></div>
-        </div>
-    </div>
-</div>
-
-<div style="clear: both;">
-    <div class="section">
-        <h2 id="experience">News</h2>
-        <div class="paper">
-            <ul>
-		<li>
-			2026-06-18: 1 paper (<a href="https://arxiv.org/pdf/2603.25743">RefAlign</a>) accepted in ECCV 2026. 
-		</li>
-		<li>
-			2026-02-21: 1 paper (<a href="https://arxiv.org/pdf/2603.08258">WaDi</a>) accepted in CVPR 2026. 
-		</li>
-		<li>
-			2025-2-27: 2 papers (<a href="https://arxiv.org/pdf/2505.03097">MaskUNet</a>, <a href="https://drive.google.com/file/d/1CenAPN9qPvBhDCc0Za6Fx6yXGXZCMpst/view">TiUE</a>) accepted in CVPR 2025.
-		</li>
-		<li>
-			2023-12-08: I was accepted as a <a href="https://cc.nankai.edu.cn/2023/1208/c13297a531077/page.htm">PhD candidate</a> in Computer Science and Technology at the College of Computer Science, Nankai University.
-		</li>
-		<li>
-			2023-11-17: 1 paper (<a href="https://arxiv.org/pdf/2311.11210.pdf">HiH</a>) submitted in Arxiv 2024. 
-		</li>
-		<li>
-			2023-07-14: 1 paper (<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">HSTL</a>) accepted in ICCV 2023. 
-		</li>
-		<li>
-			2023-07-1: 1 paper (<a href="https://ieeexplore.ieee.org/abstract/document/10221893/">GaitMM</a>) accepted in ICIP 2023. 
-		</li>
-		<li>
-			2022-04-4: 1 paper (<a href="https://kns.cnki.net/kcms2/article/abstract?v=SDjqx_HoHgu5pJiEhLEUbVshYNbTCYZdcIvhRqU01zXmyHraW6JQR4uUxMtEfiozr-47QhMZ6GBXguNzrkKnI_fvbLSlW64wFC1gSSkj5aw294FLZQoYGvM2qHhxyQzDJi1rG52PbLBqmkNMTh_3aw==&uniplatform=NZKPT&language=CHS">GaitTB</a>) accepted in 火力与指挥控制. 
-		</li>
-            </ul>
-            <div class="spanner"></div>
-        </div>
-    </div>
-</div>
-    
-
-
-<div style="clear: both;">
-    <div class="section">
-        <h2 id="confpapers">Publications</h2>
-	(* indicates equal contribution, # corresponding author)
-
-	<div class="paper"><img class="paper" src="./resources/paper_icon/refalign.png"
-				   title="RefAlign: Representation Alignment for Reference-to-Video Generation">
-            <div><strong>RefAlign: Representation Alignment for Reference-to-Video Generation</strong><br>
-		<strong>Lei Wang</strong>,  Yuxin Song, Ge Wu, Haocheng Feng, Hang Zhou, Jingdong Wang, Yaxing Wang#, Jian Yang#<br>
-                in ECCV, 2026<br>
-                <a href="https://arxiv.org/pdf/2603.25743">[Paper]</a>
-                <a href="./resources/bibtex/arxiv-2026-refalign.txt">[BibTex]</a>
-		<a href="https://gudaochangsheng.github.io/RefAlign-Page/">[Project Page]</a>
-                <a href="https://github.com/gudaochangsheng/RefAlign">[Code]</a><img
-                        src="https://img.shields.io/github/stars/gudaochangsheng/RefAlign?style=social"/>
-                <br>
-<!--                 <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-dota-1"/></a>
-                <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-hrsc2016"/></a>
-                <br> -->
-                <alert>
-        We propose RefAlign, a training-time representation alignment framework that explicitly aligns DiT reference-branch features to the semantic space of a visual foundation model (VFM) to improve identity consistency and reduce cross-modal artifacts.
-		</alert>
+        <header class="hero">
+            <div class="avatar-wrap">
+                <img class="avatar" src="./resources/images/me.jpg" alt="Lei Wang">
             </div>
-            <div class="spanner"></div>
-        </div>
 
-	<div class="paper"><img class="paper" src="./resources/paper_icon/wadi.png"
-				   title="WaDi: Weight Direction-aware Distillation for One-step Image Synthesis">
-            <div><strong>WaDi: Weight Direction-aware Distillation for One-step Image Synthesis</strong><br>
-		<strong>Lei Wang</strong>,  Yang Cheng, Senmao Li, Ge Wu, Yaxing Wang#, Jian Yang#<br>
-                in CVPR, 2026<br>
-                <a href="https://arxiv.org/pdf/2603.08258">[Paper]</a>
-                <a href="./resources/bibtex/CVPR26-wadi.txt">[BibTex]</a>
-		<a href="https://gudaochangsheng.github.io/WaDi-Page/">[Project Page]</a>
-                <a href="https://github.com/gudaochangsheng/WaDi">[Code]</a><img
-                        src="https://img.shields.io/github/stars/gudaochangsheng/WaDi?style=social"/>
-                <br>
-<!--                 <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-dota-1"/></a>
-                <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-hrsc2016"/></a>
-                <br> -->
-                <alert>
-        We propose the Low-rank Rotation of weight Direction (LoRaD), a parameter-efficient adapter tailored to one-step diffusion distillation. LoRaD is designed to model these structured directional changes using learnable low-rank rotation matrices. We further integrate LoRaD into Variational Score Distillation (VSD), resulting in Weight Direction-aware Distillation (WaDi)
-		</alert>
+            <div class="identity">
+                <h1 class="name">Lei Wang <span style="font-size: 0.68em; font-weight: 600;">(王雷)</span></h1>
+                <p class="role">Ph.D. Candidate · College of Computer Science, Nankai University</p>
+
+                <p class="meta-line">
+                    <strong>Address:</strong> No. 38, Tongyan Road, Haihe Education Park, Tianjin, China
+                </p>
+                <p class="meta-line">
+                    <strong>Email:</strong> scitop1998 [at] {gmail.com}
+                </p>
+
+                <div class="quick-links">
+                    <a href="https://github.com/gudaochangsheng">GitHub</a>
+                    <a href="https://scholar.google.com/citations?user=6Z66DAwAAAAJ&hl=zh-CN">Google Scholar</a>
+                    <a href="https://gudaochangsheng.blog.csdn.net/">CSDN</a>
+                    <a href="https://www.zhihu.com/people/gudaochangsheng">知乎</a>
+                    <a href="https://huggingface.co/gudaochangsheng">Hugging Face</a>
+                    <a href="https://modelscope.cn/profile/gudaochangsheng98">ModelScope</a>
+                    <a href="./resources/cv/CV.pdf">CV</a>
+                    <a href="http://kns--cnki--net--https.cnki.mdjsf.utuvpn.utuedu.com:9000/kcms2/article/abstract?v=-yxn0y4Pbolt3kK39EgSRgIrW6tE5BoDnBLXiN_WvtIlnJ-130_Sd6eIyoCh8c3xPU5COhYb3X1QVN7kCppr0T0IBYgJLOTPGsuqFZQ6JRN1ebvV6aELE6pUQ1bmu2Nv4nOhA5pcHqsDtuNvt8OweOiT7ciZiFPq96tR07q6_Zw=&uniplatform=NZKPT">Master’s Thesis</a>
+                </div>
             </div>
-            <div class="spanner"></div>
-        </div>
-		
-	<div class="paper"><img class="paper" src="./resources/paper_icon/maskunet.png"
-				   title="Not All Parameters Matter: Masking Diffusion Models for Enhancing Generation Ability">
-            <div><strong>Not All Parameters Matter: Masking Diffusion Models for Enhancing Generation Ability</strong><br>
-		<strong>Lei Wang</strong>,  Senmao Li, Fei Yang#, Jianye Wang, Ziheng Zhang, Yuhan Liu, Yaxing Wang,  Jian Yang#<br>
-                in CVPR, 2025<br>
-                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_Not_All_Parameters_Matter_Masking_Diffusion_Models_for_Enhancing_Generation_CVPR_2025_paper.pdf">[Paper]</a>
-                <a href="./resources/bibtex/CVPR25-maskunet.txt">[BibTex]</a>
-		<a href="https://gudaochangsheng.github.io/MaskUnet-Page/">[Project Page]</a>
-                <a href="https://github.com/gudaochangsheng/MaskUnet">[Code]</a><img
-                        src="https://img.shields.io/github/stars/gudaochangsheng/MaskUnet?style=social"/>
-                <br>
-<!--                 <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-dota-1"/></a>
-                <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-hrsc2016"/></a>
-                <br> -->
-                <alert>
-        In this paper, we propose a universal masking strategy, MaskUNet, to improve the generation quality and generalization ability of stable diffusion. 
-		</alert>
+
+            <div class="nku-logo-wrap">
+                <img class="nku-logo" src="./resources/images/nankai_logo.png" alt="Nankai University">
             </div>
-            <div class="spanner"></div>
-        </div>
+        </header>
 
-	<div class="paper"><img class="paper" src="./resources/paper_icon/Loopfree.jpg"
-				   title="One-Way Ticket : Time-Independent Unified Encoder for Distilling Text-to-Image Diffusion Model">
-            <div><strong>One-Way Ticket : Time-Independent Unified Encoder for Distilling Text-to-Image Diffusion Model</strong><br>
-		Senmao Li, <strong>Lei Wang</strong>, Kai Wang, Tao Liu, Jiehang Xie, Joost van de Weijier, Fahad Shahbaz Khan, Shiqi Yang, Yaxing Wang#, Jian Yang<br>
-                in CVPR, 2025<br>
-                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_One-Way_Ticket_Time-Independent_Unified_Encoder_for_Distilling_Text-to-Image_Diffusion_Models_CVPR_2025_paper.pdf">[Paper]</a>
-		<a href="./resources/bibtex/cvpr2025_tiue.txt">[BibTex]</a>
-                <a href="https://github.com/sen-mao/Loopfree">[Code]</a><img
-                        src="https://img.shields.io/github/stars/sen-mao/Loopfree?style=social"/>
-                <br>
-<!--                 <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-dota-1"/></a>
-                <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-hrsc2016"/></a>
-                <br> -->
-                <alert>
-        We introduce the first Time-independent Unified Encoder (TiUE) architecture, which is a loop-free distillation approach and eliminates the need for iterative noisy latent processing while maintaining high sampling fidelity with a time cost comparable to previous one-step methods.
-		</alert>
+        <nav class="nav" aria-label="Page navigation">
+            <a href="#about">About</a>
+            <a href="#honor">Honor</a>
+            <a href="#news">News</a>
+            <a href="#publications">Publications</a>
+            <a href="#internships">Internships</a>
+            <a href="#service">Review Services</a>
+            <a href="#links">Friendly Links</a>
+        </nav>
+
+        <section class="section" id="about">
+            <div class="section-heading">
+                <h2>About Me</h2>
+                <p>Generative Models · Video Synthesis · Multimodal Learning</p>
             </div>
-            <div class="spanner"></div>
-        </div>
 
-	<div class="paper"><img class="paper" src="./resources/paper_icon/ICCV23_HSTL.jpg"
-				   title="Hierarchical Spatio-Temporal Representation Learning for Gait Recognition">
-            <div><strong>Hierarchical Spatio-Temporal Representation Learning for Gait Recognition</strong><br>
-		<strong>Lei Wang</strong>, Bo Liu#, Fangfang Liang, Bincheng Wang<br>
-                in ICCV, 2023<br>
-                <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">[Paper]</a>
-                <a href="./resources/bibtex/ICCV_2023_HSTL.txt">[BibTex]</a>
-                <a href="https://github.com/gudaochangsheng/HSTL">[Code]</a><img
-                        src="https://img.shields.io/github/stars/gudaochangsheng/HSTL?style=social"/>
-                <br>
-<!--                 <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-dota-1?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-dota-1"/></a>
-                <a href="https://paperswithcode.com/sota/object-detection-in-aerial-images-on-hrsc2016?p=large-selective-kernel-network-for-remote"><img
-                src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/large-selective-kernel-network-for-remote/object-detection-in-aerial-images-on-hrsc2016"/></a>
-                <br> -->
-                <alert>
-        In this paper, we propose a hierarchical spatio-temporal representation learning (HSTL) framework for extracting gait features from coarse to fine. 
-		</alert>
+            <div class="card">
+                <div class="about-grid">
+                    <div class="about-copy">
+                        <p>
+                            I'm a Ph.D. candidate in PCA Lab, VCIP, College of Computer Science, Nankai University.
+                            I got my master's degree from the College of Information Science and Technology,
+                            Hebei Agricultural University (HEBAU) in 2024.
+                        </p>
+
+                        <p>
+                            My master's advisor is
+                            <a href="https://xinxi.hebau.edu.cn/info/1132/2523.htm">Prof. Bo Liu</a>
+                            from HEBAU. My Ph.D. advisor is
+                            <a href="https://gsmis.njust.edu.cn/open/TutorInfo.aspx?dsbh=t6AONNl4pZ5la8fwtaQrXw==&yxsh=z70ppxVSQAs=&zydm=eNM2K21sgHA=">Prof. Jian Yang</a>
+                            from Nankai University (NKU), who is a Changjiang Scholar.
+                            My vice-advisor is
+                            <a href="https://yaxingwang.github.io/">Prof. Yaxing Wang</a>
+                            from Jilin University.
+                        </p>
+
+                        <p>
+                            I am also a student member of the China Society of Image and Graphics (CSIG).
+                        </p>
+                    </div>
+
+                    <aside class="research-box">
+                        <h3>Research Interests</h3>
+                        <div class="research-tags">
+                            <span class="tag">Controllable Video Generation</span>
+                            <span class="tag">Diffusion Models</span>
+                            <span class="tag">Vision-Language Models</span>
+                            <span class="tag">Knowledge Distillation</span>
+                            <span class="tag">Gait Recognition</span>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="personal-note">
+                    <strong>Outside of academia:</strong>
+                    I am also trying to live my life with care and intention; at present,
+                    I am in a relationship that I deeply cherish and am willing to invest in for the long term. ❤️❤️❤️
+                </div>
             </div>
-            <div class="spanner"></div>
-        </div>
+        </section>
 
-	<div class="paper"><img class="paper" src="./resources/paper_icon/ICIP23_GaitMM.jpg"
-				   title="GaitMM: Multi-Granularity Motion Sequence Learning for Gait Recognition">
-            <div><strong>GaitMM: Multi-Granularity Motion Sequence Learning for Gait Recognition</strong><br>
-		<strong>Lei Wang</strong>, Bo Liu#, Bincheng Wang, Fuqiang Yu<br>
-                in ICIP, 2023<br>
-                <a href="https://ieeexplore.ieee.org/abstract/document/10221893">[Paper]</a>
-		<a href="https://arxiv.org/pdf/2209.08470.pdf">[Arxiv]</a>
-                <a href="./resources/bibtex/ICCV_2023_HSTL.txt">[BibTex]</a>
-                <a href="https://github.com/gudaochangsheng/ourcode">[Code]</a><img
-                        src="https://img.shields.io/github/stars/gudaochangsheng/ourcode?style=social"/>
-                <br>
-                <alert>
-        In this study, we propose a multi-granularity motion representation network (GaitMM) for gait sequence learning.
-		</alert>
+        <section class="section" id="honor">
+            <div class="section-heading">
+                <h2>Honor</h2>
             </div>
-            <div class="spanner"></div>
-        </div>
 
-	<div class="paper"><img class="paper" src="./resources/paper_icon/Arxiv24_HiH.jpg"
-				   title="HiH: A Multi-modal Hierarchy in Hierarchy Network for Unconstrained Gait Recognition">
-            <div><strong>HiH: A Multi-modal Hierarchy in Hierarchy Network for Unconstrained Gait Recognition</strong><br>
-		<strong>Lei Wang</strong>, Yinchi Ma, Peng Luan, Wei Yao, Congcong Li, Bo Liu#<br>
-                in Arxiv, 2024<br>
-                <a href="https://arxiv.org/pdf/2311.11210.pdf">[Paper]</a>
-                <a href="./resources/bibtex/Arxiv_2024_HiH.txt">[BibTex]</a>
-                <a href="">[Code]</a><img
-                        src=""/>
-                <br>
-                <alert>
-       We present a multi-modal Hierarchy in Hierarchy network (HiH) that integrates silhouette and pose sequences for robust gait recognition.
-		</alert>
+            <div class="card">
+                <ul class="simple-list">
+                    <li>2021–2022 Postgraduate School First Class Scholarships</li>
+                    <li>National Bronze Medal in the “China University Computer Competition - Group Programming Ladder Match” in Hebei Province in 2019.</li>
+                    <li>Second Prize of C/C++ Programming University B Group of the 10th Blue Bridge Cup National Software and Information Technology Professionals Competition Hebei Region.</li>
+                    <li>2018 Third Prize in the Professional Group of the Second College Student Programming Competition of Hebei Agricultural University.</li>
+                </ul>
             </div>
-            <div class="spanner"></div>
-        </div>
+        </section>
 
-    </div>
-</div>
+        <section class="section" id="news">
+            <div class="section-heading">
+                <h2>News</h2>
+                <p>Recent academic milestones</p>
+            </div>
 
-<div style="clear: both;">
-    <div class="section">
-        <h2 id="confpapers">Internships</h2>
-        <div class="paper">
-            <ul>
-		<li>
-		    2025.08 - present, Visual Technology Department, Baidu, Beijing, China.  Mentor: <a href="https://scholar.google.com/citations?user=1uL_9HAAAAAJ&hl=zh-CN&oi=ao">Yuxin Song</a>
-		</li>
-            </ul>
-            <div class="spanner"></div>
-        </div>
-    </div>
-</div>
+            <div class="card">
+                <ul class="timeline">
+                    <li>
+                        <span class="date">2026.06.18</span>:
+                        1 paper (<a href="https://arxiv.org/pdf/2603.25743">RefAlign</a>) accepted in ECCV 2026.
+                    </li>
+                    <li>
+                        <span class="date">2026.02.21</span>:
+                        1 paper (<a href="https://arxiv.org/pdf/2603.08258">WaDi</a>) accepted in CVPR 2026.
+                    </li>
+                    <li>
+                        <span class="date">2025.02.27</span>:
+                        2 papers
+                        (<a href="https://arxiv.org/pdf/2505.03097">MaskUNet</a>,
+                        <a href="https://drive.google.com/file/d/1CenAPN9qPvBhDCc0Za6Fx6yXGXZCMpst/view">TiUE</a>)
+                        accepted in CVPR 2025.
+                    </li>
+                    <li>
+                        <span class="date">2023.12.08</span>:
+                        I was accepted as a
+                        <a href="https://cc.nankai.edu.cn/2023/1208/c13297a531077/page.htm">Ph.D. candidate</a>
+                        in Computer Science and Technology at the College of Computer Science, Nankai University.
+                    </li>
+                    <li>
+                        <span class="date">2023.11.17</span>:
+                        1 paper (<a href="https://arxiv.org/pdf/2311.11210.pdf">HiH</a>) submitted in arXiv 2024.
+                    </li>
+                    <li>
+                        <span class="date">2023.07.14</span>:
+                        1 paper
+                        (<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">HSTL</a>)
+                        accepted in ICCV 2023.
+                    </li>
+                    <li>
+                        <span class="date">2023.07.01</span>:
+                        1 paper
+                        (<a href="https://ieeexplore.ieee.org/abstract/document/10221893/">GaitMM</a>)
+                        accepted in ICIP 2023.
+                    </li>
+                    <li>
+                        <span class="date">2022.04.04</span>:
+                        1 paper
+                        (<a href="https://kns.cnki.net/kcms2/article/abstract?v=SDjqx_HoHgu5pJiEhLEUbVshYNbTCYZdcIvhRqU01zXmyHraW6JQR4uUxMtEfiozr-47QhMZ6GBXguNzrkKnI_fvbLSlW64wFC1gSSkj5aw294FLZQoYGvM2qHhxyQzDJi1rG52PbLBqmkNMTh_3aw==&uniplatform=NZKPT&language=CHS">GaitTB</a>)
+                        accepted in 火力与指挥控制.
+                    </li>
+                </ul>
+            </div>
+        </section>
 
+        <section class="section" id="publications">
+            <div class="section-heading">
+                <h2>Publications</h2>
+                <p>* indicates equal contribution, # corresponding author</p>
+            </div>
 
-<div style="clear: both;">
-    <div class="section">
-        <h2>Review Services</h2>
-        <div class="paper">
-            <strong>Journal Reviewer</strong><br>
-	    <!-- IEEE Transactions on Neural Networks and Learning Systems (TNNLS)<br> -->
-	    <!-- IEEE Transactions on Image Processing (TIP)<br> -->
-            <!-- IEEE Transactions on Multimedia (TMM)<br> -->
-	    <!-- International Journal of Computer Vision (IJCV)<br> -->
-	    IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)<br>
-            <br>
+            <div class="pub-groups">
 
-            <strong>Conference Reviewer</strong><br>
-	    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024,2025,2026<br>
-	    Asian Conference on Computer Vision, 2022<br>
-		Neural Information Processing Systems (NeurIPS),2026<br>
-			European Conference on Computer Vision (ECCV), 2026
+                <div>
+                    <div class="pub-group-title">Featured Publications</div>
 
-        </div>
-    </div>
-</div>
+                    <article class="publication-card featured">
+                        <img class="paper-thumb" src="./resources/paper_icon/refalign.png"
+                             alt="RefAlign paper thumbnail">
 
-<div style="clear: both;">
-    <div class="section">
-        <h2>Friendly Links</h2>
-        <div class="paper">
-  <p class="authors">
-    <a href="https://sen-mao.github.io/"><strong>Senmao Li (李森茂, NKU)</strong></a>
-    &nbsp;
-    <a href="https://xiantaohu.github.io/"><strong>Xiantao Hu (胡现韬, NJUST)</strong></a>
-    &nbsp;
-    <a href="https://montaellis.github.io/"><strong>Kangneng Zhou (周康能, NKU)</strong></a>
-	&nbsp;
-    <a href="https://github.com/Martinser"><strong>Ge Wu (武戈, NKU)</strong></a>
-  </p>
-</div>
-<!-- 		<li>
-			2023-11-17: 1 paper (<a href="https://arxiv.org/pdf/2311.11210.pdf">HiH</a>) submitted in Arxiv 2024. 
-		</li>
-		<li>
-			2023-07-14: 1 paper (<a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">HSTL</a>) accepted in ICCV 2023. 
-		</li>
-		<li>
-			2023-07-1: 1 paper (<a href="https://ieeexplore.ieee.org/abstract/document/10221893/">GaitMM</a>) accepted in ICIP 2023. 
-		</li>
-		<li>
-			2022-04-4: 1 paper (<a href="https://kns.cnki.net/kcms2/article/abstract?v=SDjqx_HoHgu5pJiEhLEUbVshYNbTCYZdcIvhRqU01zXmyHraW6JQR4uUxMtEfiozr-47QhMZ6GBXguNzrkKnI_fvbLSlW64wFC1gSSkj5aw294FLZQoYGvM2qHhxyQzDJi1rG52PbLBqmkNMTh_3aw==&uniplatform=NZKPT&language=CHS">GaitTB</a>) accepted in 火力与指挥控制. 
-		</li> -->
-            </ul>
-        </div>
-    </div>
-</div>
+                        <div class="publication-content">
+                            <a class="paper-title" href="https://arxiv.org/pdf/2603.25743">
+                                RefAlign: Representation Alignment for Reference-to-Video Generation
+                            </a>
 
-<div style='width:600px;height:300px;margin:0 auto'>
-    <!--<a href="https://clustrmaps.com/site/1b7cl" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=wHZzsZcsBCB6HxOqmaDqDJX5oLT_yvrQ5HQx9agcvJo&cl=ffffff"></a>-->
-    <!--<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=wHZzsZcsBCB6HxOqmaDqDJX5oLT_yvrQ5HQx9agcvJo&cl=ffffff&w=a"></script>-->
-    <!--<script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=ItPniLpvAlUyBKssdgFtKwBDg8lP1ao3ju4dmDzw6uA&cl=ffffff&w=a"></script>-->
-<!--     <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=ItPniLpvAlUyBKssdgFtKwBDg8lP1ao3ju4dmDzw6uA&co=2d78ad&cmo=3acc3a&cmn=ff5353&ct=ffffff'></script> -->
-	<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=aV13XTfCXGdOSgImNKS632UK6iV7YbDHWySo_hIWg0g&cl=ffffff&w=a"></script>
-</div>
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Yuxin Song, Ge Wu, Haocheng Feng, Hang Zhou,
+                                Jingdong Wang, Yaxing Wang#, Jian Yang#
+                            </p>
 
+                            <p class="venue">ECCV, 2026</p>
+
+                            <div class="paper-links">
+                                <a href="https://arxiv.org/pdf/2603.25743">Paper</a>
+                                <a href="./resources/bibtex/arxiv-2026-refalign.txt">BibTeX</a>
+                                <a href="https://gudaochangsheng.github.io/RefAlign-Page/">Project Page</a>
+                                <a href="https://github.com/gudaochangsheng/RefAlign">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/gudaochangsheng/RefAlign?style=social"
+                                     alt="RefAlign GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                We propose RefAlign, a training-time representation alignment framework that explicitly aligns
+                                DiT reference-branch features to the semantic space of a visual foundation model (VFM)
+                                to improve identity consistency and reduce cross-modal artifacts.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="publication-card featured">
+                        <img class="paper-thumb" src="./resources/paper_icon/wadi.png"
+                             alt="WaDi paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title" href="https://arxiv.org/pdf/2603.08258">
+                                WaDi: Weight Direction-aware Distillation for One-step Image Synthesis
+                            </a>
+
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Yang Cheng, Senmao Li, Ge Wu,
+                                Yaxing Wang#, Jian Yang#
+                            </p>
+
+                            <p class="venue">CVPR, 2026</p>
+
+                            <div class="paper-links">
+                                <a href="https://arxiv.org/pdf/2603.08258">Paper</a>
+                                <a href="./resources/bibtex/CVPR26-wadi.txt">BibTeX</a>
+                                <a href="https://gudaochangsheng.github.io/WaDi-Page/">Project Page</a>
+                                <a href="https://github.com/gudaochangsheng/WaDi">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/gudaochangsheng/WaDi?style=social"
+                                     alt="WaDi GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                We propose the Low-rank Rotation of Weight Direction (LoRaD), a parameter-efficient adapter
+                                tailored to one-step diffusion distillation. LoRaD models structured directional changes through
+                                learnable low-rank rotation matrices and is integrated into Variational Score Distillation (VSD),
+                                resulting in Weight Direction-aware Distillation (WaDi).
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div>
+                    <div class="pub-group-title">Conference Publications</div>
+
+                    <article class="publication-card">
+                        <img class="paper-thumb" src="./resources/paper_icon/maskunet.png"
+                             alt="MaskUNet paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title"
+                               href="https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_Not_All_Parameters_Matter_Masking_Diffusion_Models_for_Enhancing_Generation_CVPR_2025_paper.pdf">
+                                Not All Parameters Matter: Masking Diffusion Models for Enhancing Generation Ability
+                            </a>
+
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Senmao Li, Fei Yang#, Jianye Wang,
+                                Ziheng Zhang, Yuhan Liu, Yaxing Wang, Jian Yang#
+                            </p>
+
+                            <p class="venue">CVPR, 2025</p>
+
+                            <div class="paper-links">
+                                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_Not_All_Parameters_Matter_Masking_Diffusion_Models_for_Enhancing_Generation_CVPR_2025_paper.pdf">Paper</a>
+                                <a href="./resources/bibtex/CVPR25-maskunet.txt">BibTeX</a>
+                                <a href="https://gudaochangsheng.github.io/MaskUnet-Page/">Project Page</a>
+                                <a href="https://github.com/gudaochangsheng/MaskUnet">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/gudaochangsheng/MaskUnet?style=social"
+                                     alt="MaskUNet GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                In this paper, we propose a universal masking strategy, MaskUNet,
+                                to improve the generation quality and generalization ability of Stable Diffusion.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <img class="paper-thumb" src="./resources/paper_icon/Loopfree.jpg"
+                             alt="TiUE paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title"
+                               href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_One-Way_Ticket_Time-Independent_Unified_Encoder_for_Distilling_Text-to-Image_Diffusion_Models_CVPR_2025_paper.pdf">
+                                One-Way Ticket: Time-Independent Unified Encoder for Distilling Text-to-Image Diffusion Models
+                            </a>
+
+                            <p class="authors">
+                                Senmao Li, <strong>Lei Wang</strong>, Kai Wang, Tao Liu,
+                                Jiehang Xie, Joost van de Weijier, Fahad Shahbaz Khan,
+                                Shiqi Yang, Yaxing Wang#, Jian Yang
+                            </p>
+
+                            <p class="venue">CVPR, 2025</p>
+
+                            <div class="paper-links">
+                                <a href="https://openaccess.thecvf.com/content/CVPR2025/papers/Li_One-Way_Ticket_Time-Independent_Unified_Encoder_for_Distilling_Text-to-Image_Diffusion_Models_CVPR_2025_paper.pdf">Paper</a>
+                                <a href="./resources/bibtex/cvpr2025_tiue.txt">BibTeX</a>
+                                <a href="https://github.com/sen-mao/Loopfree">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/sen-mao/Loopfree?style=social"
+                                     alt="Loopfree GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                We introduce the first Time-independent Unified Encoder (TiUE) architecture,
+                                a loop-free distillation approach that eliminates iterative noisy latent processing
+                                while maintaining high sampling fidelity with a time cost comparable to previous one-step methods.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <img class="paper-thumb" src="./resources/paper_icon/ICCV23_HSTL.jpg"
+                             alt="HSTL paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title"
+                               href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">
+                                Hierarchical Spatio-Temporal Representation Learning for Gait Recognition
+                            </a>
+
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Bo Liu#, Fangfang Liang, Bincheng Wang
+                            </p>
+
+                            <p class="venue">ICCV, 2023</p>
+
+                            <div class="paper-links">
+                                <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Hierarchical_Spatio-Temporal_Representation_Learning_for_Gait_Recognition_ICCV_2023_paper.pdf">Paper</a>
+                                <a href="./resources/bibtex/ICCV_2023_HSTL.txt">BibTeX</a>
+                                <a href="https://github.com/gudaochangsheng/HSTL">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/gudaochangsheng/HSTL?style=social"
+                                     alt="HSTL GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                In this paper, we propose a hierarchical spatio-temporal representation learning (HSTL)
+                                framework for extracting gait features from coarse to fine.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="publication-card">
+                        <img class="paper-thumb" src="./resources/paper_icon/ICIP23_GaitMM.jpg"
+                             alt="GaitMM paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title"
+                               href="https://ieeexplore.ieee.org/abstract/document/10221893">
+                                GaitMM: Multi-Granularity Motion Sequence Learning for Gait Recognition
+                            </a>
+
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Bo Liu#, Bincheng Wang, Fuqiang Yu
+                            </p>
+
+                            <p class="venue">ICIP, 2023</p>
+
+                            <div class="paper-links">
+                                <a href="https://ieeexplore.ieee.org/abstract/document/10221893">Paper</a>
+                                <a href="https://arxiv.org/pdf/2209.08470.pdf">arXiv</a>
+                                <a href="./resources/bibtex/ICCV_2023_HSTL.txt">BibTeX</a>
+                                <a href="https://github.com/gudaochangsheng/ourcode">Code</a>
+                                <img class="github-stars"
+                                     src="https://img.shields.io/github/stars/gudaochangsheng/ourcode?style=social"
+                                     alt="GaitMM GitHub stars">
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                In this study, we propose a multi-granularity motion representation network (GaitMM)
+                                for gait sequence learning.
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div>
+                    <div class="pub-group-title">Preprint</div>
+
+                    <article class="publication-card">
+                        <img class="paper-thumb" src="./resources/paper_icon/Arxiv24_HiH.jpg"
+                             alt="HiH paper thumbnail">
+
+                        <div class="publication-content">
+                            <a class="paper-title" href="https://arxiv.org/pdf/2311.11210.pdf">
+                                HiH: A Multi-modal Hierarchy in Hierarchy Network for Unconstrained Gait Recognition
+                            </a>
+
+                            <p class="authors">
+                                <strong>Lei Wang</strong>, Yinchi Ma, Peng Luan, Wei Yao,
+                                Congcong Li, Bo Liu#
+                            </p>
+
+                            <p class="venue">arXiv, 2024</p>
+
+                            <div class="paper-links">
+                                <a href="https://arxiv.org/pdf/2311.11210.pdf">Paper</a>
+                                <a href="./resources/bibtex/Arxiv_2024_HiH.txt">BibTeX</a>
+                                <span class="disabled-link">Code</span>
+                            </div>
+
+                            <div class="key-idea">
+                                <strong>Key idea:</strong>
+                                We present a multi-modal Hierarchy in Hierarchy network (HiH)
+                                that integrates silhouette and pose sequences for robust gait recognition.
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" id="internships">
+            <div class="section-heading">
+                <h2>Internships</h2>
+            </div>
+
+            <div class="card">
+                <ul class="simple-list">
+                    <li>
+                        2025.08 – present, Visual Technology Department, Baidu, Beijing, China.
+                        Mentor:
+                        <a href="https://scholar.google.com/citations?user=1uL_9HAAAAAJ&hl=zh-CN&oi=ao">Yuxin Song</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="service">
+            <div class="section-heading">
+                <h2>Review Services</h2>
+            </div>
+
+            <div class="two-column">
+                <div class="sub-card">
+                    <h3>Journal Reviewer</h3>
+                    <p style="margin: 0;">
+                        IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)
+                    </p>
+                </div>
+
+                <div class="sub-card">
+                    <h3>Conference Reviewer</h3>
+                    <p style="margin: 0;">
+                        IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024, 2025, 2026<br>
+                        Asian Conference on Computer Vision (ACCV), 2022<br>
+                        Neural Information Processing Systems (NeurIPS), 2026<br>
+                        European Conference on Computer Vision (ECCV), 2026
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="links">
+            <div class="section-heading">
+                <h2>Friendly Links</h2>
+            </div>
+
+            <div class="card">
+                <div class="friendly-links">
+                    <a href="https://sen-mao.github.io/">Senmao Li (李森茂, NKU)</a>
+                    <a href="https://xiantaohu.github.io/">Xiantao Hu (胡现韬, NJUST)</a>
+                    <a href="https://montaellis.github.io/">Kangneng Zhou (周康能, NKU)</a>
+                    <a href="https://github.com/Martinser">Ge Wu (武戈, NKU)</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div>© Lei Wang · Academic Homepage</div>
+
+            <div class="visitor-map">
+                <script type="text/javascript" id="clustrmaps"
+                    src="//clustrmaps.com/map_v2.js?d=aV13XTfCXGdOSgImNKS632UK6iV7YbDHWySo_hIWg0g&cl=ffffff&w=a">
+                </script>
+            </div>
+        </footer>
+
+    </main>
 </body>
 </html>
+```
